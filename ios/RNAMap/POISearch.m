@@ -20,7 +20,7 @@
 @property (nonatomic, strong) RCTPromiseRejectBlock geocodeReject;
 @property (nonatomic) BOOL isPOISearch;
 @property (nonatomic) BOOL isGeocodeSearch;
-
+@property (nonatomic) NSTimeInterval timeInt;
 @end
 
 @implementation POISearch
@@ -132,13 +132,16 @@ RCT_EXPORT_METHOD(searchPoiByCenterCoordinate: (NSDictionary *) params
                   resolve: (RCTPromiseResolveBlock)resolve
                   reject: (RCTPromiseRejectBlock) reject)
 {
+    
     if (self.search == nil) {
         self.search = [[AMapSearchAPI alloc] init];
+        
         self.search.delegate = self;
     }
     self.resolve = resolve;
     self.reject = reject;
     self.isPOISearch = TRUE;
+    
     AMapPOIAroundSearchRequest * request = [[AMapPOIAroundSearchRequest alloc] init];
     if (params != nil) {
         NSArray *keys = [params allKeys];
@@ -146,49 +149,82 @@ RCT_EXPORT_METHOD(searchPoiByCenterCoordinate: (NSDictionary *) params
             // 类型
             NSString *types = [params objectForKey:@"types"];
             request.types = types;
+            
         }
         if([keys containsObject:@"sortrule"]) {
             // 排序规则
             int sortrule = [[params objectForKey:@"sortrule"] intValue];
             request.sortrule = sortrule;
+            
         }
         if([keys containsObject:@"offset"]) {
             // 偏移量
             int offset = [[params objectForKey:@"offset"] intValue];
             request.offset = offset;
+            
         }
         if([keys containsObject:@"page"]) {
             // 页码
             int page = [[params objectForKey:@"page"] intValue];
             request.page = page;
+            
         }
         if([keys containsObject:@"requireExtension"]) {
             
             BOOL requireExtension = [[params objectForKey:@"requireExtension"] boolValue];
             request.requireExtension = requireExtension;
+            
         }
         if([keys containsObject:@"requireSubPOIs"]) {
             BOOL requireSubPOIs = [[params objectForKey:@"requireSubPOIs"] boolValue];
             request.requireSubPOIs = requireSubPOIs;
+            
         }
         
         if([keys containsObject:@"keyword"]) {
             NSString *keywords = [params objectForKey:@"keyword"];
             request.keywords = keywords;
+            
         }
         if([keys containsObject:@"coordinate"]) {
             NSDictionary *coordinate = [params objectForKey:@"coordinate"];
             double latitude = [[coordinate objectForKey:@"latitude"] doubleValue];
             double longitude = [[coordinate objectForKey:@"longitude"] doubleValue];
             request.location = [AMapGeoPoint locationWithLatitude:latitude longitude:longitude];
+            
         }
         if([keys containsObject:@"radius"]) {
             // 半径
             int radius = [[params objectForKey:@"radius"] intValue];
             request.radius = radius;
+            
         }
-        // 发起搜索
-        [self.search AMapPOIAroundSearch:request];
+        
+        if (_timeInt == 0) {
+            
+            NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
+            
+            _timeInt = [dat timeIntervalSince1970];
+            
+            // 发起搜索
+            [self.search AMapPOIAroundSearch:request];
+        }
+        else {
+            NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
+            
+            NSTimeInterval a = [dat timeIntervalSince1970];
+            
+            CGFloat difference = a - _timeInt;
+            
+            if (difference < 0.5) {
+                _timeInt = a;
+            }
+            else {
+                _timeInt = a;
+                // 发起搜索
+                [self.search AMapPOIAroundSearch:request];
+            }
+        }
     }
 }
 
@@ -244,9 +280,7 @@ RCT_EXPORT_METHOD(searchPoiByCenterCoordinate: (NSDictionary *) params
     NSDictionary *result;
     NSMutableArray *resultList;
     resultList = [NSMutableArray arrayWithCapacity:response.pois.count];
-    
-    if (response.pois.count > 0)
-    {
+    if (response.pois.count > 0) {
         [response.pois enumerateObjectsUsingBlock:^(AMapPOI * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [resultList addObject:@{
                                     @"uid": obj.uid,
