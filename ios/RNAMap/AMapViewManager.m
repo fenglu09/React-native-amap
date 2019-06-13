@@ -147,6 +147,8 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 
 - (void)mapView:(AMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
     AMapMarker *marker = [mapView getMarker:view.annotation];
+    /** add by Stephen at 2019-06-05 选中标注点并居中显示 */
+    [mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
     if (marker.onPress) {
         marker.onPress(nil);
     }

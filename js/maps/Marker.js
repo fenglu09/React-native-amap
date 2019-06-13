@@ -48,6 +48,10 @@ export default class Marker extends Component {
       ]),
       ios: PropTypes.oneOf(["red", "green", "purple"])
     }),
+    /**
+     * 自定义样式
+     */
+    infoWindowStyle: ViewPropTypes.style,
 
     /**
      * 自定义图标
@@ -166,7 +170,7 @@ export default class Marker extends Component {
   /* eslint-disable class-methods-use-this */
   renderInfoWindow(view) {
     if (view) {
-      return <InfoWindow style={style.overlay}>{view}</InfoWindow>;
+      return <InfoWindow style={[style.overlay, this.props.infoWindowStyle]}>{view}</InfoWindow>;
     }
     return null;
   }
