@@ -27,6 +27,7 @@
 		96E17F9C229424A700785AD6 /* AMapViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E17F86229424A600785AD6 /* AMapViewManager.m */; };
 		96E17F9D229424A700785AD6 /* LocationStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E17F87229424A600785AD6 /* LocationStyle.m */; };
 		96E17F9E229424A700785AD6 /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E17F89229424A700785AD6 /* Coordinate.m */; };
+		96F62E9722BA5E6F00157623 /* AMapUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F62E9622BA5E6F00157623 /* AMapUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +76,7 @@
 		96E17F88229424A600785AD6 /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinate.h; sourceTree = "<group>"; };
 		96E17F89229424A700785AD6 /* Coordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinate.m; sourceTree = "<group>"; };
 		96E17F8A229424A700785AD6 /* POISearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POISearch.h; sourceTree = "<group>"; };
+		96F62E9622BA5E6F00157623 /* AMapUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMapUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		96D51BD31FBAD31D006FB5BB /* RNAMap */ = {
 			isa = PBXGroup;
 			children = (
+				96F62E9622BA5E6F00157623 /* AMapUtils.m */,
 				96E17F77229424A500785AD6 /* AMapCallout.h */,
 				96E17F6C229424A400785AD6 /* AMapCallout.m */,
 				96E17F73229424A500785AD6 /* AMapCalloutManager.m */,
@@ -208,6 +211,7 @@
 				96E17F9A229424A700785AD6 /* POISearch.m in Sources */,
 				96E17F93229424A700785AD6 /* AMapPolyline.m in Sources */,
 				96E17F95229424A700785AD6 /* AMapCircle.m in Sources */,
+				96F62E9722BA5E6F00157623 /* AMapUtils.m in Sources */,
 				96E17F9C229424A700785AD6 /* AMapViewManager.m in Sources */,
 				96E17F94229424A700785AD6 /* AMapMarker.m in Sources */,
 				96E17F8C229424A700785AD6 /* AMapCallout.m in Sources */,
