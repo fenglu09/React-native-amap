@@ -4,6 +4,7 @@ import Polyline from "./js/maps/Polyline";
 import Polygon from "./js/maps/Polygon";
 import Circle from "./js/maps/Circle";
 import MultiPoint from "./js/maps/MultiPoint";
+import MapUtils from './js/Utils'
 import RNLocation from "./js/location/index";
 import POISearch from './js/poiSearch/POISearch';
 
@@ -14,4 +15,14 @@ MapView.Circle = Circle;
 MapView.MultiPoint = MultiPoint;
 
 export default MapView;
-export { MapView, Marker, Polyline, Polygon, Circle, MultiPoint, RNLocation, POISearch };
+export {
+  MapView,
+  Marker,
+  Polyline,
+  Polygon,
+  Circle,
+  MultiPoint,
+  RNLocation,
+  POISearch,
+  MapUtils,
+};
