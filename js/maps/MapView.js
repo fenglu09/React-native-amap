@@ -248,7 +248,24 @@ export default class MapView extends Component {
      *   }
      * }}
      */
-    onStatusChangeComplete: PropTypes.func
+    onStatusChangeComplete: PropTypes.func,
+
+    /**
+     *  地图完成移动， iOS
+     *
+     * @param {{
+      *   nativeEvent: {
+        *     longitude: number,
+        *     latitude: number,
+        *     longitudeDelta: number,
+        *     latitudeDelta: number,
+        *     rotation: number,
+        *     zoomLevel: number,
+        *     tilt: number,
+        *   }
+        * }}
+        */
+    onMapMoveComplete: PropTypes.func,
   };
 
   name = "AMapView";

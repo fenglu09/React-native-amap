@@ -49,6 +49,7 @@ RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStatusChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStatusChangeComplete, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMapMoveComplete, RCTBubblingEventBlock)
 
 
 RCT_EXPORT_METHOD(setLockedPin: (nonnull NSNumber*)reactTag
@@ -208,6 +209,23 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     }
 }
 
+// 用户移动地图结束后事件回调
+- (void)mapView:(AMapView *)mapView mapDidMoveByUser:(BOOL)wasUserAction {
+    if (mapView.onMapMoveComplete) {
+        MAMapStatus *status = mapView.getMapStatus;
+        mapView.onMapMoveComplete(@{
+                @"wasUserAction": @(wasUserAction),
+                @"zoomLevel": @(status.zoomLevel),
+                @"tilt": @(status.cameraDegree),
+                @"rotation": @(status.rotationDegree),
+                @"latitude": @(status.centerCoordinate.latitude),
+                @"longitude": @(status.centerCoordinate.longitude),
+                @"latitudeDelta": @(mapView.region.span.latitudeDelta),
+                @"longitudeDelta": @(mapView.region.span.longitudeDelta),
+                });
+    }
+}
+
 - (void)mapInitComplete:(AMapView *)mapView {
     mapView.loaded = YES;
 
@@ -217,5 +235,6 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
         mapView.region = mapView.initialRegion;
     }
 }
+
 
 @end
