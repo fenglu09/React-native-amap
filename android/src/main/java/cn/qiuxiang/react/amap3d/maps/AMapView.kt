@@ -55,7 +55,12 @@ class AMapView(context: Context) : TextureMapView(context) {
         }
 
         map.setOnMarkerClickListener { marker ->
-            emit(markers[marker.id]?.id, "onPress")
+           // add by david at 2019-7-9 start
+            val event = Arguments.createMap()
+            event.putString("index", marker.title)
+            emit(markers[marker.id]?.id, "onPress",event)
+            // add by david at 2019-7-9 end
+             // emit(markers[marker.id]?.id, "onPress")
             false
         }
 
