@@ -8,6 +8,7 @@
 @property(nonatomic, copy) RCTBubblingEventBlock onDragStart;
 @property(nonatomic, copy) RCTBubblingEventBlock onDrag;
 @property(nonatomic, copy) RCTBubblingEventBlock onDragEnd;
+@property(nonatomic, copy) NSString *index;// add by david
 
 - (MAAnnotationView *)annotationView;
 - (MAPointAnnotation *)annotation;

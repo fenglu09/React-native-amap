@@ -42,6 +42,7 @@
 
 - (void)setTitle:(NSString *)title {
     _annotation.title = title;
+    self.index = title;
 }
 
 - (void)setColor:(MAPinAnnotationColor)color {
