@@ -1,6 +1,6 @@
 package cn.qiuxiang.react.amap3d;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;

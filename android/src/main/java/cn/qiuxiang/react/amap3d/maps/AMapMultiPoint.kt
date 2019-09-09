@@ -16,7 +16,7 @@ class AMapMultiPoint(context: Context) : ReactViewGroup(context), AMapOverlay {
                 .map {
                     val data = points.getMap(it)
                     val item = MultiPointItem(LatLng(
-                            data.getDouble("latitude"),
+                            data?.getDouble("latitude")!!,
                             data.getDouble("longitude")))
                     if (data.hasKey("title")) {
                         item.title = data.getString("title")

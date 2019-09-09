@@ -188,7 +188,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         ArrayList((0 until list!!.size())
                 .map { list.getMap(it) }
                 .map {
-                    builder.include(LatLng(it.getDouble("latitude"), it.getDouble("longitude")))
+                    builder.include(LatLng(it?.getDouble("latitude")!!, it.getDouble("longitude")))
                 }
             )
 
@@ -209,7 +209,7 @@ class AMapView(context: Context) : TextureMapView(context) {
 
         if (target.hasKey("coordinate")) {
             val json = target.getMap("coordinate")
-            coordinate = LatLng(json.getDouble("latitude"), json.getDouble("longitude"))
+            coordinate = LatLng(json?.getDouble("latitude")!!, json.getDouble("longitude"))
         }
 
         if (target.hasKey("zoomLevel")) {

@@ -51,7 +51,7 @@ class AMapPolyline(context: Context) : ReactViewGroup(context), AMapOverlay {
     fun setCoordinates(coordinates: ReadableArray) {
         this.coordinates = ArrayList((0 until coordinates.size())
                 .map { coordinates.getMap(it) }
-                .map { LatLng(it.getDouble("latitude"), it.getDouble("longitude")) })
+                .map { LatLng(it?.getDouble("latitude")!!, it.getDouble("longitude")) })
 
         polyline?.points = this.coordinates
     }

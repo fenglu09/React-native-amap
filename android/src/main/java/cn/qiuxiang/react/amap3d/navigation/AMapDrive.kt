@@ -10,9 +10,9 @@ class AMapDrive(context: ThemedReactContext) : AMapNavigation(context) {
     override fun calculateRoute(args: ReadableArray?) {
         val points = args?.getArray(2)!!
         navigation.calculateDriveRoute(
-                listOf(latLngFromReadableMap(args.getMap(0))),
-                listOf(latLngFromReadableMap(args.getMap(1))),
-                (0 until points.size()).map { latLngFromReadableMap(points.getMap(it)) },
+                listOf(latLngFromReadableMap(args?.getMap(0)!!)),
+                listOf(latLngFromReadableMap(args?.getMap(1)!!)),
+                (0 until points.size()).map { latLngFromReadableMap(points?.getMap(it)!!) },
                 PathPlanningStrategy.DRIVING_DEFAULT
         )
     }
